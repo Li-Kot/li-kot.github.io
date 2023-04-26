@@ -4,7 +4,6 @@ const GAME_LEVEL = 30;
 const BOOM_SRC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABL0lEQVR4nO2WwUoDMRRFz6p1p2O7U3/O0m7UfoK1ftBgQereWYgbK9jl9B9af0AJ3EAQRl+ajLPphQtDyHsnyTxeAgfZ9Qq80IG+5NZVABNgAWwC8EZjY81J0glwAwyBPjAHPgNYk92cO8UMleM4BnytRGvg3QD86ZVi3fdVDHgQBKZ4rVxm9bXqVPAHcGTHwn0GqPfMCj1tKKRH4Aw4B5YR4J212icNCRzQ6yJy1yMLeNECuLSAw+YQeim4gz5FguvfgFXGgmpy1RX4eZ+jTnFt+ccPLYBLC3jcAvjS2kB2GaFb3XYmzTOCb61Qf0m8ZYC6HL0YcGfX4jQIXO25U79w9woxqxB8oGOfGQtuq3/aU+w0xzus0C1TqiF4WK2xUUz1psiD/13VX733IAJ9AzJbibhtZ2x+AAAAAElFTkSuQmCC"
 
 var game_data = [];
-var game_over = false;
 
 const makeGameData = () => {
     for (let j = 1; j <= GAME_AREA_LENGTH; j++) {
@@ -122,11 +121,10 @@ const init = () => {
         if ($('.cell.init').length == GAME_LEVEL) {
             alert("You Win!");
             clearInterval(time);
-            game_over = true;
         }
     }, 500);
     $('.cell').on('click', function () {
-        if ($(this).hasClass('checked') || game_over) {
+        if ($(this).hasClass('checked')) {
             return;
         }
         let span = $(this).children("span");
@@ -148,20 +146,28 @@ const init = () => {
             }
         }
         if (img.length > 0) {
-            $(this).addClass("error");
+            img.parent('.cell').addClass("error");
             $('img').removeClass("disabled");
-            alert("炸了");
-            game_over = true;
+            setTimeout(() => {
+                alert("炸了");
+                setTimeout(() => {
+                    location.reload();
+                }, 100);
+            }, 100);
         }
     })
     $('.cell').on('contextmenu', function (event) {
         //処理
         event.preventDefault();
-        if ($(this).hasClass('ok') || game_over) {
+        if ($(this).hasClass('ok')) {
             return;
         }
         $(this).toggleClass('checked');
     });
+}
+
+window.oncontextmenu = (event) => {
+    event.preventDefault();
 }
 
 init();
