@@ -1,1 +1,2 @@
-"# Minesweeper" 
+"# Minesweeper Game"
+By JQ
