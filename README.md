@@ -1,2 +1,2 @@
 "# Minesweeper Game"
-By JQ
+use JQ
