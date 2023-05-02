@@ -1,6 +1,14 @@
 * {
 	margin: 0;
 	padding: 0;
+	font-size: 24px;
+}
+
+body {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 table {
@@ -14,7 +22,6 @@ table {
 	align-items: center;
 	width: 50px;
 	height: 50px;
-	font-size: 24px;
 	background-color: rgb(116, 116, 116);
 	box-shadow: inset 1px 1px 1px 3px rgb(218, 218, 218);
 	user-select: none;
@@ -41,7 +48,7 @@ table {
 }
 
 .error {
-	background-color: red!important;
+	background-color: red !important;
 }
 
 .cell.checked {
@@ -49,4 +56,29 @@ table {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 70%;
+}
+
+#p1 table {
+	padding: 12px 0;
+	margin: 12px 0;
+}
+
+button {
+	width: 100px;
+	border: 3px solid rgba(0, 0, 0, 0.678);
+	outline: none;
+	background: rgb(0, 153, 255);
+	padding: 6px 12px;
+	border-radius: 4px;
+	cursor: pointer;
+	color: white;
+	font-size: 20px;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+button:active {
+	opacity: 0.5;
 }
