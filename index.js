@@ -1,7 +1,9 @@
+var GAME_AREA_LENGTH = 20;
+var GAME_LEVEL = 90;
+var BOOM_SRC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABL0lEQVR4nO2WwUoDMRRFz6p1p2O7U3/O0m7UfoK1ftBgQereWYgbK9jl9B9af0AJ3EAQRl+ajLPphQtDyHsnyTxeAgfZ9Qq80IG+5NZVABNgAWwC8EZjY81J0glwAwyBPjAHPgNYk92cO8UMleM4BnytRGvg3QD86ZVi3fdVDHgQBKZ4rVxm9bXqVPAHcGTHwn0GqPfMCj1tKKRH4Aw4B5YR4J212icNCRzQ6yJy1yMLeNECuLSAw+YQeim4gz5FguvfgFXGgmpy1RX4eZ+jTnFt+ccPLYBLC3jcAvjS2kB2GaFb3XYmzTOCb61Qf0m8ZYC6HL0YcGfX4jQIXO25U79w9woxqxB8oGOfGQtuq3/aU+w0xzus0C1TqiF4WK2xUUz1psiD/13VX733IAJ9AzJbibhtZ2x+AAAAAElFTkSuQmCC"
 
-const GAME_AREA_LENGTH = 10;
-const GAME_LEVEL = 30;
-const BOOM_SRC = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAABL0lEQVR4nO2WwUoDMRRFz6p1p2O7U3/O0m7UfoK1ftBgQereWYgbK9jl9B9af0AJ3EAQRl+ajLPphQtDyHsnyTxeAgfZ9Qq80IG+5NZVABNgAWwC8EZjY81J0glwAwyBPjAHPgNYk92cO8UMleM4BnytRGvg3QD86ZVi3fdVDHgQBKZ4rVxm9bXqVPAHcGTHwn0GqPfMCj1tKKRH4Aw4B5YR4J212icNCRzQ6yJy1yMLeNECuLSAw+YQeim4gz5FguvfgFXGgmpy1RX4eZ+jTnFt+ccPLYBLC3jcAvjS2kB2GaFb3XYmzTOCb61Qf0m8ZYC6HL0YcGfX4jQIXO25U79w9woxqxB8oGOfGQtuq3/aU+w0xzus0C1TqiF4WK2xUUz1psiD/13VX733IAJ9AzJbibhtZ2x+AAAAAElFTkSuQmCC"
+$('#length').val(GAME_AREA_LENGTH);
+$('#count').val(GAME_LEVEL);
 
 var game_data = [];
 
@@ -16,7 +18,7 @@ const makeGameData = () => {
 }
 
 const getRableBoomIndex = () => {
-    return Math.round(Math.floor(Math.random() * 10) * (GAME_AREA_LENGTH / 10));
+    return Math.floor(Math.random() * GAME_AREA_LENGTH);
 }
 
 const makeBoomIndex = () => {
@@ -118,7 +120,7 @@ const init = () => {
     insertTextToData();
     makeGameTable();
     let time = setInterval(() => {
-        if ($('.cell.init').length == GAME_LEVEL) {
+        if ($('.cell.ok').length == (GAME_AREA_LENGTH * GAME_AREA_LENGTH - GAME_LEVEL)) {
             alert("You Win!");
             clearInterval(time);
         }
@@ -170,4 +172,9 @@ window.oncontextmenu = (event) => {
     event.preventDefault();
 }
 
-init();
+$('#start').on('click', function () {
+    GAME_AREA_LENGTH = $('#length').val();
+    GAME_LEVEL = $('#count').val();
+    $('#p1').hide();
+    init();
+})
