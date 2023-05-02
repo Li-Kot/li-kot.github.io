@@ -123,6 +123,9 @@ const init = () => {
         if ($('.cell.ok').length == (GAME_AREA_LENGTH * GAME_AREA_LENGTH - GAME_LEVEL)) {
             alert("You Win!");
             clearInterval(time);
+            setTimeout(() => {
+                location.reload();
+            }, 100);
         }
     }, 500);
     $('.cell').on('click', function () {
