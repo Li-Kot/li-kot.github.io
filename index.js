@@ -178,6 +178,10 @@ window.oncontextmenu = (event) => {
 $('#start').on('click', function () {
     GAME_AREA_LENGTH = $('#length').val();
     GAME_LEVEL = $('#count').val();
+    if(GAME_LEVEL >= GAME_AREA_LENGTH*GAME_AREA_LENGTH ){
+        alert("Count is too much!");
+        return
+    }
     $('#p1').hide();
     init();
 })
